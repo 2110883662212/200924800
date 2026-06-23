@@ -1,0 +1,54 @@
+@model RegistroEventos.Models.Participante
+@{
+    ViewData["Title"] = "Comprobante de Inscripción";
+    Layout = "_Layout"; // O usar un Layout limpio si se desea
+}
+
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card p-4 border-danger shadow" style="max-width: 600px; width: 100%; border: 2px dashed #dc3545;">
+        <div class="text-center mb-4">
+            <h3 class="text-uppercase text-danger fw-bold m-0">Comprobante de Inscripción</h3>
+            <small class="text-muted">Universidad Sistema de Eventos</small>
+            <hr />
+        </div>
+        
+        <div class="row g-3">
+            <div class="col-6">
+                <span class="text-muted d-block small">No. de Registro</span>
+                <strong>#00@Model.Id</strong>
+            </div>
+            <div class="col-6 text-end">
+                <span class="text-muted d-block small">Fecha de Emisión</span>
+                <strong>@DateTime.Now.ToString("dd/MM/yyyy")</strong>
+            </div>
+            
+            <div class="col-12 bg-light p-3 rounded">
+                <span class="text-muted d-block small">Participante</span>
+                <h5 class="text-primary fw-bold">@Model.Nombre</h5>
+                <span class="text-muted small">@Model.Correo</span>
+            </div>
+
+            <div class="col-12">
+                <span class="text-muted d-block small">Taller u Conferencia Asignada</span>
+                <p class="fs-5 fw-semibold mb-1">@ViewBag.NombreTaller</p>
+            </div>
+
+            <div class="col-6">
+                <span class="text-muted d-block small">Modalidad</span>
+                <span class="badge bg-secondary p-2 mt-1 fs-6">@Model.TipoEntrada</span>
+            </div>
+            
+            <div class="col-6 text-end align-self-end">
+                <span class="text-success small d-block">✓ Términos Aceptados</span>
+            </div>
+        </div>
+
+        <hr class="mt-4" />
+        <div class="d-flex justify-content-between align-items-center d-print-none">
+            <button onclick="window.print();" class="btn btn-danger">
+                🖨️ Imprimir / Guardar PDF
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Volver al Inicio</a>
+        </div>
+    </div>
+</div>

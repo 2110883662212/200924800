@@ -1,0 +1,64 @@
+@model RegistroEventos.Models.InscripcionViewModel
+@{
+    ViewData["Title"] = "Inscripción de Participantes";
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6 border p-4 shadow-sm rounded bg-white">
+        <h2 class="text-center mb-4 text-primary">Registro al Evento</h2>
+        
+        <form asp-action="Inscribir" method="post">
+            @Html.AntiForgeryToken()
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Participante.Nombre" class="form-label">Nombre Completo</label>
+                <input asp-for="Participante.Nombre" class="form-control" placeholder="Ej: Juan Pérez" />
+                <span asp-validation-for="Participante.Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Participante.Correo" class="form-label">Correo Electrónico</label>
+                <input asp-for="Participante.Correo" type="email" class="form-control" placeholder="juan@Universidad.edu" />
+                <span asp-validation-for="Participante.Correo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Participante.TallerId" class="form-label">Seleccione el Taller</label>
+                <select asp-for="Participante.TallerId" asp-items="Model.TalleresDisponibles" class="form-select">
+                    <option value="">-- Seleccione una opción --</option>
+                </select>
+                <span asp-validation-for="Participante.TallerId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label d-block">Tipo de Entrada</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Participante.TipoEntrada" value="Presencial" id="radioPresencial" />
+                    <label class="form-check-label" for="radioPresencial">Presencial</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Participante.TipoEntrada" value="Virtual" id="radioVirtual" />
+                    <label class="form-check-label" for="radioVirtual">Virtual</label>
+                </div>
+                <div><span asp-validation-for="Participante.TipoEntrada" class="text-danger"></span></div>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" asp-for="Participante.AceptaTerminos" class="form-check-input" id="checkTerminos" />
+                <label class="form-check-label" for="checkTerminos">Acepto los términos y condiciones de la universidad</label>
+                <div><span asp-validation-for="Participante.AceptaTerminos" class="text-danger"></span></div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success btn-lg">Confirmar Inscripción</button>
+                <a asp-action="Index" class="btn btn-secondary">Regresar a la Lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
