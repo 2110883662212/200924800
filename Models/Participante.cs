@@ -18,9 +18,10 @@ namespace RegistroEventos.Models
         public int TallerId { get; set; }
 
         [Required(ErrorMessage = "Debe seleccionar el tipo de entrada.")]
-        public string TipoEntrada { get; set; } = string.Empty; // "Presencial" o "Virtual"
+        public string TipoEntrada { get; set; } = string.Empty;
 
-        [Range(typeof(bool), "true", "true", ErrorMessage = "Debe aceptar los términos y condiciones.")]
+        // Modificado para evitar el bug del Range booleano en cliente
+        [Display(Name = "Acepto los términos y condiciones")]
         public bool AceptaTerminos { get; set; }
     }
 }
