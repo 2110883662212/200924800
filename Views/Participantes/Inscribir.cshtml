@@ -60,5 +60,6 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @* Removidos temporalmente los scripts de validación en cliente para asegurar *@
+    @* que sea el servidor quien maneje el flujo del Post y no se trabe el botón *@
 }
